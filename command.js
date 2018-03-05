@@ -27,9 +27,24 @@ module.exports = {
   },
 
   echo: function(cmd, str) {
-  	if (cmd === 'echo') {
-  		process.stdout.write(str);
-  	}
-  }
+    if (cmd === 'echo') {
+      process.stdout.write(str)
+    }
+  },
 
+  getCat: function(cmd, str) {
+    if (cmd === 'cat') {
+      fs.readdir('.', function(err, files) {
+        if (err) throw err
+        files.forEach(function(file) {
+          if (file === str) {
+            fs.readFile('./' + str, 'utf8', function(err, contents) {
+              process.stdout.write(contents.toString() + '\n')
+            })
+          }
+          process.stdout.write('prompt > ')
+        })
+      })
+    }
+  }
 }
