@@ -1,14 +1,28 @@
-// var exports = module.exports = {};
+var fs = require('fs')
 
-exports.getPwd = function(cmd) {
-  if (cmd === 'pwd') {
-    process.stdout.write(process.cwd())
-  }
-}
+module.exports = {
+  getPwd: function(cmd) {
+    if (cmd === 'pwd') {
+      process.stdout.write(process.cwd())
+    }
+  },
 
-exports.getDate = function(cmd) {
-  if (cmd === 'date') {
-    var date = new Date()
-    process.stdout.write(String(date))
+  getDate: function(cmd) {
+    if (cmd === 'date') {
+      var date = new Date()
+      process.stdout.write(String(date))
+    }
+  },
+
+  getLs: function(cmd) {
+    if (cmd === 'ls') {
+      fs.readdir('.', function(err, files) {
+        if (err) throw err
+        files.forEach(function(file) {
+          process.stdout.write(file.toString() + '\n')
+        })
+        process.stdout.write('prompt > ')
+      })
+    }
   }
 }
