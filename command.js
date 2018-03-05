@@ -46,5 +46,44 @@ module.exports = {
         })
       })
     }
+  },
+
+  getHead: function(cmd, str) {
+    if (cmd === 'head') {
+      fs.readdir('.', function(err, files) {
+        if (err) throw err
+        files.forEach(function(file) {
+          if (file === str) {
+            fs.readFile('./' + str, 'utf8', function(err, contents) {
+           	  var fullContentArr = (contents.toString() + '\n').split('\n');
+           	  var firstFiveLines = fullContentArr.slice(0, 5).join('\n');
+           	  // console.log(fullContentArr);
+              process.stdout.write(firstFiveLines);
+            })
+          }
+          process.stdout.write('prompt > ')
+        })
+      })
+    }
+  },
+
+  getTail: function(cmd, str) {
+    if (cmd === 'tail') {
+      fs.readdir('.', function(err, files) {
+        if (err) throw err
+        files.forEach(function(file) {
+          if (file === str) {
+            fs.readFile('./' + str, 'utf8', function(err, contents) {
+           	  var fullContentArr = (contents.toString() + '\n').split('\n');
+           	  var lastFiveLines = fullContentArr.slice(fullContentArr.length - 6, fullContentArr.length).join('\n');
+           	  // console.log(fullContentArr);
+              process.stdout.write(lastFiveLines);
+            })
+          }
+          process.stdout.write('prompt > ')
+        })
+      })
+    }
   }
+
 }

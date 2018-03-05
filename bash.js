@@ -22,7 +22,10 @@ process.stdin.on('data', function(data) {
   command.getLs(cmd)
   command.echo(cmd, str)
   command.getCat(cmd, str)
-
-  //process.stdout.write('You typed: ' + cmd)
-  process.stdout.write('\nprompt > ')
-})
+  command.getHead(cmd, str)
+  command.getTail(cmd, str)
+//1
+  //process.stdout.write('You typed: ' + cmd) //2
+  process.stdout.write('\nprompt > ') //3
+}) //4
+//5
