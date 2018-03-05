@@ -24,5 +24,12 @@ module.exports = {
         process.stdout.write('prompt > ')
       })
     }
+  },
+
+  echo: function(cmd, str) {
+  	if (cmd === 'echo') {
+  		process.stdout.write(str);
+  	}
   }
+
 }
